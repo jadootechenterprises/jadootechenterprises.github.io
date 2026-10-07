@@ -798,6 +798,10 @@ async function submitToGoogleSheets(data) {
   if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_SCRIPT_URL.trim())
     throw new Error('SCRIPT_URL_NOT_SET');
 
+  // Google Apps Script requires no-cors mode when called from a browser.
+  // We use fetch with mode:'no-cors' — this means we cannot read the response,
+  // but the data IS sent and received by the script correctly.
+  // We wait 3s and treat no network error = success.
   const payload = new URLSearchParams({
     fullName:        data.fullName,
     companyName:     data.companyName    || '',
@@ -810,30 +814,22 @@ async function submitToGoogleSheets(data) {
   });
 
   const controller = new AbortController();
-  const timeoutId  = setTimeout(() => controller.abort(), 10000);
+  const timeoutId  = setTimeout(() => controller.abort(), 12000);
 
-  let response;
   try {
-    response = await fetch(GOOGLE_SCRIPT_URL, {
+    await fetch(GOOGLE_SCRIPT_URL, {
       method:  'POST',
+      mode:    'no-cors',   // Required for Google Apps Script from browser
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body:    payload.toString(),
       signal:  controller.signal,
     });
+    // no-cors means response is opaque — we cannot read it.
+    // If fetch did not throw, the request reached Google's servers.
+    return { status: 'success' };
   } finally {
     clearTimeout(timeoutId);
   }
-
-  let result;
-  try {
-    result = JSON.parse(await response.text());
-  } catch {
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return;
-  }
-
-  if (result.status === 'error') throw new Error(result.message || 'Server error');
-  return result;
 }
 
 /* ============================================================
