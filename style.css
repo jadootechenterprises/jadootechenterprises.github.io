@@ -102,15 +102,26 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-head);font-weight:700;line-height:1.15;
 
 /* LOGO FIX — remove white box */
 .nav-logo{display:flex;align-items:center;flex-shrink:0;line-height:0}
+.logo-wrap{
+  /* Clips the white margin that surrounds the PNG artwork */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  /* Use a tight container so white margin is not visible */
+  height: 38px;
+  max-width: 165px;
+}
 .logo-img{
-  height: 36px;
+  height: 100%;
   width: auto;
-  max-width: 160px;
+  max-width: 165px;
   object-fit: contain;
   display: block;
-  /* Remove white background that bleeds from the PNG margins */
-  mix-blend-mode: lighten;
-  filter: drop-shadow(0 0 0 transparent);
+  /* On dark bg: multiply removes white, lighten keeps colour */
+  mix-blend-mode: screen;
+  /* Slight brightness boost so the coloured logo pops on navy */
+  filter: brightness(1.05) contrast(1.05);
 }
 
 .nav-links{display:flex;align-items:center;gap:.25rem}
@@ -142,23 +153,23 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-head);font-weight:700;line-height:1.15;
 .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding-block:5rem;position:relative;z-index:1}
 .hero-content{max-width:560px}
 
-/* Eyebrow — replaces generic bullet badge */
-.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:600;letter-spacing:.08em;color:var(--cyan-light);background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);border-radius:var(--r-full);padding:.3rem 1rem;margin-bottom:1.5rem}
+/* Eyebrow — service tags line */
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan-light);background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.18);border-radius:var(--r-full);padding:.3rem 1rem;margin-bottom:1.5rem}
 .eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s ease-in-out infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
 
 .hero-headline{font-family:var(--font-head);font-size:clamp(3rem,6vw,4.5rem);font-weight:900;line-height:1.05;color:var(--white);margin-bottom:1.5rem;letter-spacing:-.02em}
-.hero-subtext{font-size:1.1rem;color:var(--gray-400);line-height:1.8;margin-bottom:2rem;max-width:480px}
-.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.hero-subtext{font-size:1.05rem;color:var(--gray-400);line-height:1.8;margin-bottom:2rem;max-width:490px}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:.5rem}
 
-/* Service list — replaces generic tags */
-.hero-service-list{display:flex;flex-direction:column;gap:.75rem}
-.hsl-item{display:flex;align-items:flex-start;gap:.75rem;font-size:.875rem}
-.hsl-item strong{color:var(--white);font-weight:600;display:block;margin-bottom:.1rem}
-.hsl-item span{color:var(--gray-500);font-size:.8rem}
-.hsl-dot{width:8px;height:8px;border-radius:50%;background:var(--blue-mid);flex-shrink:0;margin-top:6px}
-.hsl-dot--cyan{background:var(--cyan)}
-.hsl-dot--purple{background:var(--purple)}
+/* Hero chips — replaces the old hsl-item list */
+.hero-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}.hero-chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:500;color:var(--gray-400);background:rgba(255,255,255,.04);border:1px solid var(--navy-border);border-radius:var(--r-full);padding:.35rem .9rem;transition:color var(--ease),border-color var(--ease),background var(--ease);text-decoration:none;white-space:nowrap}
+.hero-chip:hover{color:var(--white);border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.08)}
+.hero-chip svg{flex-shrink:0;opacity:.7}
+.hero-chip--cyan{color:var(--cyan-light);border-color:rgba(6,182,212,.2);background:rgba(6,182,212,.05)}
+.hero-chip--cyan:hover{border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.1);color:var(--cyan-light)}
+.hero-chip--purple{color:var(--purple-mid);border-color:rgba(139,92,246,.2);background:rgba(139,92,246,.05)}
+.hero-chip--purple:hover{border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1);color:var(--purple-mid)}
 
 /* Hero code card */
 .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:420px}
@@ -319,7 +330,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-head);font-weight:700;line-height:1.15;
 .about-card-wrap::before{content:'';position:absolute;inset:-2px;background:var(--grad-bp);border-radius:calc(var(--r-xl)+2px);opacity:.25;filter:blur(20px)}
 .about-card{position:relative;background:var(--card-bg);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:2.5rem 2rem;text-align:center;min-width:280px;box-shadow:var(--sh-xl)}
 .about-logo-wrap{display:flex;justify-content:center;margin-bottom:1.5rem}
-.about-logo{height:52px;width:auto;object-fit:contain;mix-blend-mode:lighten}
+.about-logo{height:52px;width:auto;object-fit:contain;mix-blend-mode:screen;filter:brightness(1.05)}
 .about-card-tagline{font-size:.85rem;color:var(--gray-400);line-height:1.7;margin-bottom:1.5rem}
 .about-divider{height:1px;background:var(--navy-border);margin-bottom:1.5rem}
 .about-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
@@ -349,7 +360,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-head);font-weight:700;line-height:1.15;
 .ci-label{font-size:.65rem;color:var(--gray-500);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .ci-value{font-size:.85rem;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .contact-logo-wrap{margin-top:1.5rem}
-.contact-logo{height:40px;width:auto;object-fit:contain;mix-blend-mode:lighten;opacity:.8;transition:opacity var(--ease)}
+.contact-logo{height:40px;width:auto;object-fit:contain;mix-blend-mode:screen;filter:brightness(1.05);opacity:.85;transition:opacity var(--ease)}
 .contact-logo:hover{opacity:1}
 
 /* Form */
@@ -408,7 +419,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-head);font-weight:700;line-height:1.15;
 .footer{background:var(--navy);border-top:1px solid var(--navy-border)}
 .footer-top{padding-block:4rem 3rem}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2.5rem}
-.footer-logo{height:36px;width:auto;object-fit:contain;margin-bottom:1rem;mix-blend-mode:lighten}
+.footer-logo{height:36px;width:auto;object-fit:contain;margin-bottom:1rem;mix-blend-mode:screen;filter:brightness(1.05)}
 .footer-tagline{font-size:.85rem;color:var(--gray-500);line-height:1.7;margin-bottom:1.5rem;max-width:220px}
 .footer-socials{display:flex;gap:.75rem}
 .social-link{width:34px;height:34px;border-radius:var(--r-md);background:rgba(255,255,255,.04);border:1px solid var(--navy-border);display:flex;align-items:center;justify-content:center;color:var(--gray-500);transition:background var(--ease),color var(--ease),border-color var(--ease),transform var(--ease)}
@@ -445,8 +456,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-head);font-weight:700;line-height:1.15;
   .hero-content{max-width:100%}
   .hero-subtext{margin-inline:auto}
   .hero-ctas{justify-content:center}
-  .hero-service-list{align-items:center}
-  .hsl-item{justify-content:center}
+  .hero-chips{justify-content:center}
   .hero-visual{min-height:320px}
   .float-card-1{left:0}.float-card-2,.float-card-3{right:0}
 
@@ -479,6 +489,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-head);font-weight:700;line-height:1.15;
   .hero-headline{font-size:clamp(2.25rem,8vw,3rem)}
   .hero-ctas{flex-direction:column;align-items:center}
   .hero-ctas .btn{width:100%;max-width:280px}
+  .hero-chips{justify-content:center}
   .hero-card-main{max-width:100%}
   .float-card{display:none}
 
