@@ -24,7 +24,7 @@
 /** The ID from your Google Sheet URL:
  *  https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit
  */
-var SPREADSHEET_ID = 'YOUR_GOOGLE_SPREADSHEET_ID';
+var SPREADSHEET_ID = '1Jv7NJhN-TXhAnxDjzscMLJDAUshOR14PsYfok8f7WrI';
 
 /** The exact name of the sheet/tab where leads will be saved. */
 var SHEET_NAME = 'Leads';
