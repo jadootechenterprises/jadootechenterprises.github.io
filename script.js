@@ -8,7 +8,7 @@
 /* ============================================================
    CONFIGURATION — only value you need to change
    ============================================================ */
-const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfv5qwsGlRRdDkwEkF4mFCo5PkdRlfUpCVLC1LKvRcep2QB-qpcGcbXQoyQ6TPXQlDcQ/exec';
 
 /* ============================================================
    SERVICE MODAL DATA
