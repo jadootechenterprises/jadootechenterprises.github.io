@@ -394,7 +394,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   transition: max-height var(--t-slow);
 }
-.mobile-menu.open { max-height: 480px; }
+.mobile-menu.open { max-height: 520px; }
 .mobile-link {
   font-size: var(--text-base);
   font-weight: 500;
@@ -553,7 +553,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-faint);
   margin-left: auto;
 }
-.hc-body { padding: var(--s5) var(--s5); }
+.hc-body { padding: var(--s5) var(--s5); overflow: hidden; }
 
 /* Code syntax */
 .code-line {
@@ -561,6 +561,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 12.5px;
   line-height: 1.9;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .code-blank   { height: var(--s3); }
 .code-indent  { padding-left: 1.5rem; }
@@ -1524,15 +1526,20 @@ h1, h2, h3, h4, h5, h6 {
     gap: var(--s10);
     padding-block: var(--s16);
   }
-  .hero-content { max-width: 100%; }
-  .hero-subtext { margin-inline: auto; }
-  .hero-ctas  { justify-content: center; }
-  .hero-chips { justify-content: center; }
-  .hero-visual { justify-content: center; }
-  .hero-card-main { max-width: 420px; }
+  .hero-content  { max-width: 100%; }
+  .hero-subtext  { margin-inline: auto; max-width: 100%; }
+  .hero-ctas     { justify-content: center; }
+  .hero-chips    { justify-content: center; }
+  .hero-visual   { justify-content: center; }
+  .hero-card-main { max-width: 440px; }
 
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Services border-grid — switch to gapped cards at tablet */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+  }
+
+  .portfolio-grid    { grid-template-columns: repeat(2, 1fr); }
   .deliverables-grid { grid-template-columns: repeat(2, 1fr); }
 
   .process-track { grid-template-columns: repeat(3, 1fr); }
@@ -1542,8 +1549,8 @@ h1, h2, h3, h4, h5, h6 {
   .about-content .section-title { text-align: center; }
   .about-content .section-tag   { display: block; text-align: center; }
   .about-content .btn           { display: block; width: fit-content; margin-inline: auto; }
-  .about-visual { order: -1; }
-  .about-card-wrap { max-width: 340px; }
+  .about-visual    { order: -1; }
+  .about-card-wrap { max-width: 380px; margin-inline: auto; }
 
   .contact-inner { grid-template-columns: 1fr; gap: var(--s10); }
   .footer-grid   { grid-template-columns: 1fr 1fr; gap: var(--s8); }
@@ -1552,22 +1559,39 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── 20. RESPONSIVE — 768px ───────────────────────────────── */
 @media (max-width: 768px) {
-  :root { --pad-x: 1.25rem; --nav-h: 58px; }
-  .section { padding-block: var(--s16); }
+  :root { --pad-x: 1.25rem; --nav-h: 56px; }
 
-  .section-title { font-size: var(--text-2xl); }
-  .hero-headline { font-size: var(--text-4xl); }
+  .section { padding-block: var(--s12); }
+
+  .section-header  { margin-bottom: var(--s8); }
+  .section-title   { font-size: var(--text-2xl); letter-spacing: -.015em; }
+  .section-desc    { font-size: var(--text-sm); }
+
+  /* Hero */
+  .hero-inner { padding-block: var(--s12); gap: var(--s8); }
+  .hero-headline { font-size: 2.5rem; letter-spacing: -.025em; }
+  .hero-subtext  { font-size: var(--text-base); max-width: 100%; }
   .hero-ctas { flex-direction: column; align-items: center; }
-  .hero-ctas .btn { width: 100%; max-width: 280px; }
+  .hero-ctas .btn { width: 100%; max-width: 300px; }
+  .hero-chips { justify-content: center; }
+  .hero-card-main { max-width: 100%; }
+  .hero-visual { padding-inline: 0; }
 
-  .services-grid  { grid-template-columns: 1fr; }
-  .portfolio-grid { grid-template-columns: 1fr; }
+  /* Services — full width single column, remove 1px gap trick */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1px;
+    border-radius: var(--r8);
+  }
+
+  .portfolio-grid    { grid-template-columns: 1fr; }
   .deliverables-grid { grid-template-columns: 1fr; }
-  .tech-grid { max-width: 100%; }
+  .tech-grid         { max-width: 100%; }
 
+  /* Process steps — vertical list */
   .process-track {
     grid-template-columns: 1fr;
-    gap: var(--s3);
+    gap: var(--s4);
   }
   .process-step {
     text-align: left;
@@ -1577,29 +1601,90 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 0;
   }
   .ps-number { flex-shrink: 0; margin: 0; }
+  .ps-title  { font-size: var(--text-base); }
 
-  .form-row { grid-template-columns: 1fr; }
+  /* About */
+  .about-card-wrap { max-width: 100%; }
+  .about-card { padding: var(--s6) var(--s4); }
+
+  /* Contact */
+  .ci-value { white-space: normal; word-break: break-all; }
+  .form-row  { grid-template-columns: 1fr; }
   .contact-form-wrap { padding: var(--s5); }
+  .form-title { font-size: var(--text-lg); }
 
-  .footer-grid   { grid-template-columns: 1fr; gap: var(--s8); }
+  /* CTA */
+  .cta-heading { font-size: var(--text-2xl); }
+  .cta-desc    { font-size: var(--text-sm); }
+
+  /* Footer */
+  .footer-grid   { grid-template-columns: 1fr; gap: var(--s6); }
   .footer-brand  { grid-column: span 1; }
-  .footer-bottom-inner { flex-direction: column; text-align: center; }
+  .footer-tagline { max-width: 100%; }
+  .footer-bottom-inner { flex-direction: column; text-align: center; gap: var(--s2); }
 
-  .modal-content { padding: var(--s4) var(--s4) var(--s6); }
-  .modal-box     { border-radius: var(--r8); }
+  /* Modal */
+  .modal-overlay { padding: var(--s4); align-items: flex-end; }
+  .modal-box     { max-height: 92vh; border-radius: var(--r8) var(--r8) var(--r4) var(--r4); }
+  .modal-content { padding: var(--s3) var(--s4) var(--s6); }
+  .modal-actions { flex-direction: column; }
+  .modal-actions .btn { width: 100%; }
 }
 
 /* ── 21. RESPONSIVE — 480px ───────────────────────────────── */
 @media (max-width: 480px) {
-  :root { --pad-x: 1rem; }
-  .hero-headline { font-size: var(--text-3xl); }
-  .navbar .btn-sm { font-size: var(--text-xs); padding: .35rem .75rem; }
-  .modal-actions { flex-direction: column; }
-  .modal-actions .btn { width: 100%; }
-  .process-track { gap: var(--s4); }
+  :root { --pad-x: 1rem; --nav-h: 54px; }
+
+  .hero-headline { font-size: 2.1rem; }
+  .hero-eyebrow  { font-size: .6rem; }
+
+  /* Navbar CTA — tighter on very small screens */
+  .navbar .btn-sm { font-size: .67rem; padding: .32rem .7rem; }
+
+  /* Logo wordmark — slightly smaller */
+  .jt-logo--nav .jt-name { font-size: 1rem; }
+
+  /* Services grid on very small — ensure no overflow */
+  .service-card { padding: var(--s4); }
+  .sc-title     { font-size: var(--text-sm); }
+
+  /* Portfolio */
+  .pc-body { padding: var(--s3) var(--s3) var(--s4); }
+
+  /* Deliverables */
+  .del-card .del-list { padding: var(--s3) var(--s4); }
+
+  /* Tech stack — wrap without overflow */
+  .tech-badge { padding: var(--s2) var(--s3); }
+  .tb-name    { font-size: .65rem; }
+
+  /* Form */
+  .contact-form-wrap { padding: var(--s4); }
+  .form-title { font-size: var(--text-base); margin-bottom: var(--s4); }
+
+  /* Process */
+  .ps-desc { font-size: .7rem; }
+
+  /* CTA */
+  .cta-section { padding-block: var(--s12); }
+  .cta-heading { font-size: var(--text-2xl); }
+
+  /* Section headers on small phones */
+  .section-title { font-size: var(--text-xl); }
+  .section { padding-block: var(--s10); }
 }
 
-/* ── 22. REDUCED MOTION ───────────────────────────────────── */
+/* ── 22. RESPONSIVE — 360px ───────────────────────────────── */
+@media (max-width: 360px) {
+  :root { --pad-x: .875rem; }
+  .hero-headline { font-size: 1.85rem; }
+  .jt-logo--nav .jt-name { font-size: .9rem; }
+  .jt-logo--nav .jt-sub  { display: none; }
+  .navbar .btn-sm { display: none; } /* hide CTA on very tiny screens */
+  .hamburger { margin-left: auto; }
+}
+
+/* ── 23. REDUCED MOTION ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
