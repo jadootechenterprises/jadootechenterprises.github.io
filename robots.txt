@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /data/
 
 Sitemap: https://jadootechenterprises.github.io/sitemap.xml
