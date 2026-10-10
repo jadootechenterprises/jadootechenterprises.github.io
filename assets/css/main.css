@@ -339,20 +339,23 @@ h1,h2,h3,h4,h5,h6{font-family:var(--f-display);font-weight:700;color:var(--text)
 /* Metrics card */
 .metrics-card{
   position:relative;z-index:1;background:var(--surf);border:1.5px solid var(--bdr);
-  border-radius:var(--r-lg);padding:var(--s5) var(--s6);
-  display:flex;gap:var(--s8);align-items:center;width:100%;max-width:460px;
-  box-shadow:var(--sh-md)
+  border-radius:var(--r-lg);padding:var(--s4) var(--s5);
+  display:flex;gap:0;align-items:stretch;width:100%;max-width:460px;
+  box-shadow:var(--sh-md);overflow:hidden;
 }
-.metric{display:flex;align-items:center;gap:var(--s3)}
+.metric{
+  display:flex;align-items:center;gap:var(--s3);
+  flex:1;padding:var(--s3) var(--s4);
+}
 .metric-icon{
-  width:36px;height:36px;border-radius:var(--r-md);
+  width:32px;height:32px;border-radius:var(--r-md);
   background:var(--blue-dim);display:flex;align-items:center;justify-content:center;
-  color:var(--blue);flex-shrink:0
+  color:var(--blue);flex-shrink:0;
 }
-.metric-body{}
-.metric-val{font-family:var(--f-display);font-size:var(--t-xl);font-weight:800;color:var(--text);line-height:1}
-.metric-lbl{font-size:var(--t-xs);color:var(--text-3);margin-top:2px}
-.metric-sep{width:1px;height:36px;background:var(--bdr);flex-shrink:0}
+.metric-body{min-width:0}
+.metric-val{font-family:var(--f-display);font-size:1.1rem;font-weight:800;color:var(--text);line-height:1;white-space:nowrap}
+.metric-lbl{font-size:.68rem;color:var(--text-3);margin-top:3px;white-space:nowrap}
+.metric-sep{width:1px;background:var(--bdr);flex-shrink:0;align-self:stretch}
 
 /* ── 7. SERVICES ──────────────────────────────────────────── */
 .services-section{background:var(--bg)}
