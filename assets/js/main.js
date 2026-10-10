@@ -181,70 +181,82 @@ const Content = (() => {
     return data;
   }
 
-  /* ── Build service rows ── */
+  /* ── Build service rows (5 core, numbered list layout) ── */
+  const CORE_SVC_IDS = ['website-development','web-application','python-automation','ai-solutions','api-integration'];
+
+  /* Icon SVGs per service */
+  const SVC_ICONS = {
+    'website-development': `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M9 21H15M12 17V21"/></svg>`,
+    'web-application':     `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9l3 3-3 3M13 15h3"/></svg>`,
+    'python-automation':   `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3L6 8L8 13M16 3L18 8L16 13M11 17L13 7"/></svg>`,
+    'ai-solutions':        `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>`,
+    'api-integration':     `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 12h6M15 6v3M15 15v3"/></svg>`,
+  };
+
   function buildServices(services) {
     const list = $('#services-list');
     if (!list || !services.length) return;
 
-    list.innerHTML = services.map((svc, i) => `
-      <li class="service-row reveal${i > 0 ? ' reveal-delay-' + Math.min(i, 3) : ''}"
-          data-service="${esc(svc.id)}">
-        <span class="sr-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
-        <div class="sr-body">
-          <h3 class="sr-title">${esc(svc.title)}</h3>
-          <p class="sr-desc">${esc(svc.summary)}</p>
-          <div class="sr-tech" aria-label="Technologies">
-            ${svc.tech.map(t => `<span class="sr-tech-item">${esc(t)}</span>`).join('')}
-          </div>
+    const coreServices = CORE_SVC_IDS.map(id => services.find(s => s.id === id)).filter(Boolean);
 
-          <!-- Expandable detail panel -->
-          <div class="sr-detail" id="sr-detail-${esc(svc.id)}" aria-label="${esc(svc.title)} details">
-            <div class="sr-detail-cols">
-              <div>
-                <h4>Overview</h4>
-                <p class="sr-detail-text">${esc(svc.detail)}</p>
-              </div>
-              <div>
-                <h4>What's included</h4>
-                <ul class="sr-include-list">
-                  ${svc.includes.map(item => `<li>${esc(item)}</li>`).join('')}
-                </ul>
-              </div>
-            </div>
-            <div class="sr-detail-footer">
-              <div class="sr-tech">
-                ${svc.tech.map(t => `<span class="sr-tech-item">${esc(t)}</span>`).join('')}
-              </div>
-              <button class="btn btn-primary btn-sm" onclick="requestService('${esc(svc.cta)}')">
-                Enquire about this service
-              </button>
-            </div>
+    list.innerHTML = coreServices.map((svc, i) => `
+      <div class="svc-row" role="listitem button" tabindex="0"
+           data-service="${esc(svc.id)}"
+           aria-expanded="false"
+           aria-controls="sd-${esc(svc.id)}">
+        <span class="svc-row-num" aria-hidden="true">0${i+1}</span>
+        <span class="svc-row-icon" aria-hidden="true">${SVC_ICONS[svc.id] || ''}</span>
+        <div class="svc-row-body">
+          <div class="svc-row-title">${esc(svc.title)}</div>
+          <div class="svc-row-desc">${esc(svc.summary)}</div>
+        </div>
+        <div class="svc-row-tags" aria-label="Technologies">
+          ${svc.tech.map(t => `<span class="svc-tag">${esc(t)}</span>`).join('')}
+        </div>
+        <span class="svc-row-arrow" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="svc-detail" id="sd-${esc(svc.id)}">
+        <div class="svc-detail-cols">
+          <div>
+            <h4>Overview</h4>
+            <p class="svc-detail-text">${esc(svc.detail)}</p>
+          </div>
+          <div>
+            <h4>What's included</h4>
+            <ul class="svc-include-list">
+              ${svc.includes.map(item => `<li>${esc(item)}</li>`).join('')}
+            </ul>
           </div>
         </div>
-        <span class="sr-arrow" aria-hidden="true">→</span>
-      </li>
+        <div class="svc-detail-footer">
+          <button class="btn btn-primary btn-sm" onclick="requestService('${esc(svc.cta)}')">Enquire about this service</button>
+        </div>
+      </div>
     `).join('');
 
-    /* Toggle expand on row click */
-    $$('.service-row', list).forEach(row => {
+    /* Toggle expand */
+    $$('.svc-row', list).forEach(row => {
+      const toggle = () => {
+        if (e && e.target.closest('button')) return;
+        const id  = row.dataset.service;
+        const det = $(`#sd-${id}`);
+        if (!det) return;
+        const open = det.classList.toggle('open');
+        row.setAttribute('aria-expanded', String(open));
+      };
       row.addEventListener('click', e => {
-        /* Don't toggle when the enquire button inside was clicked */
-        if (e.target.closest('button, a')) return;
-        const detail = $('.sr-detail', row);
-        if (!detail) return;
-        const open = detail.classList.toggle('open');
+        if (e.target.closest('button')) return;
+        const id  = row.dataset.service;
+        const det = $(`#sd-${id}`);
+        if (!det) return;
+        const open = det.classList.toggle('open');
         row.setAttribute('aria-expanded', String(open));
       });
-      /* Keyboard support */
       row.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          row.click();
-        }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); row.click(); }
       });
-      row.setAttribute('tabindex', '0');
-      row.setAttribute('role', 'button');
-      row.setAttribute('aria-expanded', 'false');
     });
   }
 
@@ -254,67 +266,38 @@ const Content = (() => {
     if (!list || !projects.length) return;
 
     list.innerHTML = projects.map((proj, i) => {
-      const featured = i === 0;
-      const termLines = (proj.terminalLines || []).map(l => {
-        let cls = 'pc-term-line';
-        if (l.type === 'prompt')  cls += ' pc-term-line--prompt';
-        if (l.type === 'out')     cls += ' pc-term-line--out';
-        if (l.type === 'success') cls += ' pc-term-line--success';
-        if (l.type === 'kw')      cls += ' pc-term-line--kw';
+      const featured  = i === 0;
+      const filename  = proj.tech[0] ? proj.tech[0].toLowerCase().replace(/\s/g,'_')+'.py' : 'run.py';
+      const termLines = (proj.terminalLines||[]).map(l => {
+        let cls = 'pt-line';
+        if (l.type==='prompt')  cls += ' prompt';
+        if (l.type==='success') cls += ' ok';
+        if (l.type==='kw')      cls += ' kw';
         return `<div class="${cls}">${esc(l.text)}</div>`;
       }).join('');
-
       const demoBtn = proj.demoUrl
         ? `<a href="${esc(proj.demoUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Live site ↗</a>`
-        : `<button class="btn btn-ghost btn-sm btn-disabled" disabled aria-disabled="true">No live demo</button>`;
-
+        : `<button class="btn btn-outline btn-sm btn-disabled" disabled aria-disabled="true">No live demo</button>`;
       const ghBtn = proj.githubUrl
-        ? `<a href="${esc(proj.githubUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">GitHub ↗</a>`
-        : '';
-
+        ? `<a href="${esc(proj.githubUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub ↗</a>` : '';
       return `
-        <article class="project-card ${featured ? 'project-card--featured' : 'project-card--small'} reveal"
-                 aria-label="${esc(proj.title)}">
-
-          <!-- Terminal panel -->
-          <div class="pc-terminal">
-            <div class="pc-term-header">
-              <div class="pc-term-dots">
-                <span class="pc-term-dot red"></span>
-                <span class="pc-term-dot yellow"></span>
-                <span class="pc-term-dot green"></span>
-              </div>
-              <span class="pc-term-title">${esc(proj.tech[0] ? proj.tech[0].toLowerCase().replace(/\s/g, '_') + '.py' : 'run.py')}</span>
+        <article class="proj-card ${featured?'proj-card--featured':''} reveal" aria-label="${esc(proj.title)}">
+          <div class="proj-terminal">
+            <div class="pt-bar">
+              <div class="pt-dots"><span class="pt-dot r"></span><span class="pt-dot y"></span><span class="pt-dot g"></span></div>
+              <span class="pt-title">${esc(filename)}</span>
             </div>
-            <div class="pc-term-lines">${termLines}</div>
+            <div class="pt-lines">${termLines}</div>
           </div>
-
-          <!-- Info panel -->
-          <div class="pc-info">
-            <div class="pc-stack" aria-label="Technologies used">
-              ${proj.tech.map(t => `<span class="pc-stack-tag">${esc(t)}</span>`).join('')}
+          <div class="proj-info">
+            <div class="proj-tags">${proj.tech.map(t=>`<span class="proj-tag">${esc(t)}</span>`).join('')}</div>
+            <h3 class="proj-title">${esc(proj.title)}</h3>
+            <div class="proj-psr">
+              <div class="proj-psr-row"><span class="proj-psr-lbl">Problem</span><p class="proj-psr-val">${esc(proj.problem)}</p></div>
+              <div class="proj-psr-row"><span class="proj-psr-lbl">Solution</span><p class="proj-psr-val">${esc(proj.solution)}</p></div>
+              <div class="proj-psr-row"><span class="proj-psr-lbl">Result</span><p class="proj-psr-val"><strong>${esc(proj.result)}</strong></p></div>
             </div>
-            <h3 class="pc-title">${esc(proj.title)}</h3>
-
-            <div class="pc-psr">
-              <div class="pc-psr-row">
-                <span class="pc-psr-label">Problem</span>
-                <p class="pc-psr-text">${esc(proj.problem)}</p>
-              </div>
-              <div class="pc-psr-row">
-                <span class="pc-psr-label">Solution</span>
-                <p class="pc-psr-text">${esc(proj.solution)}</p>
-              </div>
-              <div class="pc-psr-row">
-                <span class="pc-psr-label">Result</span>
-                <p class="pc-psr-text"><strong>${esc(proj.result)}</strong></p>
-              </div>
-            </div>
-
-            <div class="pc-actions">
-              ${demoBtn}
-              ${ghBtn}
-            </div>
+            <div class="proj-actions">${demoBtn}${ghBtn}</div>
           </div>
         </article>`;
     }).join('');
