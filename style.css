@@ -390,11 +390,13 @@ h1, h2, h3, h4, h5, h6 {
   padding: var(--s3) var(--pad-x) var(--s6);
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  max-height: 0;
   overflow: hidden;
   transition: max-height var(--t-slow);
 }
-.mobile-menu.open { max-height: 520px; }
+.mobile-menu.open {
+  display: flex;
+  max-height: 520px;
+}
 .mobile-link {
   font-size: var(--text-base);
   font-weight: 500;
@@ -1516,9 +1518,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── 19. RESPONSIVE — 1024px ──────────────────────────────── */
 @media (max-width: 1024px) {
-  .nav-links  { display: none; }
-  .hamburger  { display: flex; }
-  .mobile-menu { display: flex; }
+  .nav-links   { display: none; }
+  .hamburger   { display: flex; }
 
   .hero-inner {
     grid-template-columns: 1fr;
@@ -1679,9 +1680,6 @@ h1, h2, h3, h4, h5, h6 {
   :root { --pad-x: .875rem; }
   .hero-headline { font-size: 1.85rem; }
   .jt-logo--nav .jt-name { font-size: .9rem; }
-  .jt-logo--nav .jt-sub  { display: none; }
-  .navbar .btn-sm { display: none; } /* hide CTA on very tiny screens */
-  .hamburger { margin-left: auto; }
 }
 
 /* ── 23. REDUCED MOTION ───────────────────────────────────── */
