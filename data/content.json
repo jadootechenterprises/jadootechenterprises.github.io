@@ -1,0 +1,215 @@
+{
+  "services": [
+    {
+      "id": "website-development",
+      "title": "Website Development",
+      "summary": "Responsive business websites built for fast loading, SEO and lead generation.",
+      "detail": "We build business websites, landing pages and portfolios from scratch. Every site is mobile-first, passes Core Web Vitals and ships with a working contact form, SEO structure and deployment to GitHub Pages or cPanel.",
+      "includes": [
+        "Responsive layout from 320 px to 1920 px",
+        "Contact form wired to Google Sheets",
+        "SEO meta tags, sitemap and robots.txt",
+        "GitHub Pages or cPanel deployment",
+        "Full source code and documentation"
+      ],
+      "tech": ["HTML5", "CSS3", "JavaScript"],
+      "cta": "Website Development"
+    },
+    {
+      "id": "web-application",
+      "title": "Web Application Development",
+      "summary": "Custom dashboards, booking tools and management portals built around your workflow.",
+      "detail": "We design and build web apps around the way your team actually works — not off-the-shelf software that forces you to adapt. Typical projects include inventory systems, booking portals, admin dashboards and multi-user management tools.",
+      "includes": [
+        "Database design and setup",
+        "User authentication and roles",
+        "REST API backend",
+        "Admin panel with reporting",
+        "Deployment to shared or VPS hosting"
+      ],
+      "tech": ["PHP", "Laravel", "MySQL", "JavaScript"],
+      "cta": "Web Application Development"
+    },
+    {
+      "id": "python-automation",
+      "title": "Python Automation",
+      "summary": "Scripts that replace daily manual Excel, email and data tasks.",
+      "detail": "If your team repeats the same data task every day, we can automate it. Common projects: reading emails and updating spreadsheets, scraping data and generating reports, scheduling jobs, processing files in bulk.",
+      "includes": [
+        "Script development and unit tests",
+        "Error handling with email alerts",
+        "Windows Task Scheduler or cron setup",
+        "Testing on real production data",
+        "Written handover documentation"
+      ],
+      "tech": ["Python", "Pandas", "Selenium", "OpenPyXL", "SMTP"],
+      "cta": "Python Automation"
+    },
+    {
+      "id": "api-integration",
+      "title": "API Integration",
+      "summary": "Connect your apps, payment gateways, CRMs and shipping providers.",
+      "detail": "We wire together the platforms you already use so they share data without manual copying. Typical integrations: Razorpay or Stripe payments, Shopify orders into ERP, WhatsApp Business notifications, third-party CRM sync.",
+      "includes": [
+        "OAuth and API key authentication",
+        "Webhook listener setup",
+        "Error handling with retry logic",
+        "Postman collection and API docs",
+        "Monitoring and alerting hooks"
+      ],
+      "tech": ["REST APIs", "Python", "PHP", "JavaScript", "Webhooks"],
+      "cta": "API Integration"
+    },
+    {
+      "id": "business-automation",
+      "title": "Business Automation",
+      "summary": "End-to-end automation for reporting, approvals and notifications.",
+      "detail": "Beyond single scripts, we build complete automation pipelines. Typical scope: daily report generation and emailing, multi-step approval flows, customer follow-up sequences, inventory update triggers.",
+      "includes": [
+        "Process mapping before any code is written",
+        "Automation pipeline development",
+        "Notification and alerting systems",
+        "Scheduled execution setup",
+        "Process documentation"
+      ],
+      "tech": ["Python", "REST APIs", "Task Scheduler", "SMTP"],
+      "cta": "Business Automation"
+    },
+    {
+      "id": "ai-solutions",
+      "title": "AI Solutions",
+      "summary": "Practical AI tools: data analysis, LLM integrations, automated summaries.",
+      "detail": "We build AI tools that solve a specific problem, not demos. Typical projects: CSV upload and instant analysis with charts, document Q&A with an LLM, automated report summarisation, predictive models on business data.",
+      "includes": [
+        "Problem scoping before choosing a model",
+        "LLM API integration (OpenAI, Gemini)",
+        "Streamlit or web UI dashboard",
+        "Data validation and output QA",
+        "Source code and documentation"
+      ],
+      "tech": ["Python", "Streamlit", "Pandas", "Plotly", "OpenAI API"],
+      "cta": "AI Solutions"
+    },
+    {
+      "id": "uiux-development",
+      "title": "UI/UX Development",
+      "summary": "Interfaces built for real users: clear hierarchy, fast interactions, accessible.",
+      "detail": "We build the front-end layer for web apps where the UI matters — dashboards, customer portals, admin interfaces. All work is accessible, keyboard-navigable and tested across devices.",
+      "includes": [
+        "Component-based HTML/CSS development",
+        "WCAG AA accessibility compliance",
+        "Cross-browser and device testing",
+        "Micro-interactions and transitions",
+        "Design system documentation"
+      ],
+      "tech": ["HTML5", "CSS3", "JavaScript"],
+      "cta": "UI/UX Development"
+    },
+    {
+      "id": "website-maintenance",
+      "title": "Website Maintenance",
+      "summary": "Ongoing bug fixes, updates, security patches and performance work.",
+      "detail": "We handle the ongoing work that keeps a website running well. Scope: bug fixes, content updates, security patches, performance improvements, broken link checks and monthly health reports.",
+      "includes": [
+        "Bug fixes and layout corrections",
+        "Content and media updates",
+        "Performance and security audits",
+        "Monthly health report",
+        "Priority response for critical issues"
+      ],
+      "tech": ["HTML", "CSS", "JavaScript", "GitHub"],
+      "cta": "Website Maintenance"
+    },
+    {
+      "id": "video-editing",
+      "title": "Video Editing",
+      "summary": "Promotional videos, reels and product demos edited for your brand.",
+      "detail": "We edit promotional videos, product walkthroughs, Instagram and YouTube reels. Deliverables include colour-graded, audio-mixed video exported in platform-ready formats.",
+      "includes": [
+        "Rough cut and final edit",
+        "Colour grading and audio mixing",
+        "Motion titles and transitions",
+        "Subtitle and caption track",
+        "Exports for each target platform"
+      ],
+      "tech": ["Adobe Premiere Pro", "After Effects", "Audition"],
+      "cta": "Video Editing"
+    },
+    {
+      "id": "photo-editing",
+      "title": "Photo Editing",
+      "summary": "Product retouching, background removal and brand graphic creation.",
+      "detail": "We retouch product photos, remove or replace backgrounds, create social media graphics and produce brand assets for web and print.",
+      "includes": [
+        "Product photo retouching",
+        "Background removal or replacement",
+        "Social media graphic templates",
+        "Logo touchups and file conversion",
+        "Web-optimised exports"
+      ],
+      "tech": ["Photoshop", "Illustrator", "Lightroom"],
+      "cta": "Photo Editing"
+    }
+  ],
+
+  "projects": [
+    {
+      "id": "this-site",
+      "title": "JadooTech Enterprises Website",
+      "problem": "Needed a zero-cost lead-capture site that works without a backend.",
+      "solution": "Static HTML/CSS/JS site on GitHub Pages with Google Apps Script handling form submissions to a private Google Sheet.",
+      "result": "Live at jadootechenterprises.github.io. Enquiries land directly in Google Sheets as structured rows.",
+      "tech": ["HTML5", "CSS3", "JavaScript", "GitHub Pages", "Google Apps Script"],
+      "demoUrl": "https://jadootechenterprises.github.io/",
+      "githubUrl": "https://github.com/jadootechenterprises/jadootechenterprises.github.io",
+      "terminalLines": [
+        { "type": "prompt", "text": "$ git push origin main" },
+        { "type": "out",    "text": "Branch 'main' → origin/main" },
+        { "type": "out",    "text": "GitHub Pages build triggered" },
+        { "type": "success","text": "Live at jadootechenterprises.github.io" }
+      ]
+    },
+    {
+      "id": "python-automation",
+      "title": "Daily Report Automation",
+      "problem": "Team spent 3 hours each morning copying order data from emails into Excel, then emailing a summary to managers.",
+      "solution": "Python script runs at 8 am via Windows Task Scheduler. Reads inbox, extracts structured data with regex, updates the master workbook and emails the formatted report.",
+      "result": "3-hour daily task reduced to 0 manual minutes. Script has run reliably for 90+ days.",
+      "tech": ["Python", "Pandas", "OpenPyXL", "SMTP", "IMAP"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "terminalLines": [
+        { "type": "prompt", "text": "$ python daily_report.py" },
+        { "type": "out",    "text": "Reading inbox (47 messages)..." },
+        { "type": "out",    "text": "Extracted 312 order rows" },
+        { "type": "out",    "text": "Updated master.xlsx" },
+        { "type": "out",    "text": "Report emailed to 3 managers" },
+        { "type": "success","text": "Done in 6.1 s" }
+      ]
+    },
+    {
+      "id": "api-platform",
+      "title": "E-commerce API Integration",
+      "problem": "Every Shopify order required manual steps: update ERP stock, send WhatsApp notification, log to Google Sheet.",
+      "solution": "Python webhook listener on VPS. On each new order: pushes to ERP via REST, fires WhatsApp Business API message, appends row to Google Sheet.",
+      "result": "3 manual steps per order eliminated. Integration handles 200+ orders per day without intervention.",
+      "tech": ["Python", "REST APIs", "Webhooks", "PHP"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "terminalLines": [
+        { "type": "kw",     "text": "POST /webhook/order-created" },
+        { "type": "out",    "text": "→ ERP stock update [200 OK, 41ms]" },
+        { "type": "out",    "text": "→ WhatsApp notify [200 OK, 28ms]" },
+        { "type": "out",    "text": "→ Sheets log [200 OK, 19ms]" },
+        { "type": "success","text": "✓ All 3 systems synced" }
+      ]
+    }
+  ],
+
+  "tech": [
+    "Python", "PHP", "Laravel", "JavaScript",
+    "HTML5", "CSS3", "MySQL", "REST APIs",
+    "Selenium", "Pandas", "NumPy", "Streamlit",
+    "Plotly", "LLM APIs"
+  ]
+}
