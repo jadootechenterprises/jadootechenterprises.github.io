@@ -1,7 +1,7 @@
 {
   "heading": "Work",
   "kicker": "What We've Built",
-  "subtext": "Three projects that are live or recently completed. Each one started with a real business problem.",
+  "subtext": "Projects we have built across mobile apps, AI tools, automation and business software.",
   "items": [
     {
       "id": "this-site",
@@ -18,20 +18,167 @@
       "images": [],
       "terminalLines": [
         { "type": "prompt",  "text": "$ git push origin main" },
-        { "type": "out",     "text": "Branch 'main' → origin/main" },
+        { "type": "out",     "text": "Branch main updated" },
         { "type": "out",     "text": "GitHub Pages build triggered" },
         { "type": "success", "text": "Live at jadootechenterprises.github.io" }
+      ]
+    },
+    {
+      "id": "doer-assistance",
+      "visible": true,
+      "featured": false,
+      "order": 2,
+      "title": "Do.er — Personal Mobile Assistant",
+      "problem": "Managing tasks, phone controls and getting quick answers required switching between multiple apps with no single intelligent layer.",
+      "solution": "A personal mobile assistant app that understands natural language, controls phone functions, answers questions contextually and adapts to the user mood and working style.",
+      "result": "One unified assistant for task management, phone control and intelligent Q&A built around how the user actually works.",
+      "tech": ["Python", "AI / LLM APIs", "Mobile", "NLP"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "prompt",  "text": "User: Set DND and remind me at 5pm" },
+        { "type": "out",     "text": "Do.er: DND enabled" },
+        { "type": "out",     "text": "Do.er: Reminder set for 5:00 PM" },
+        { "type": "out",     "text": "Do.er: Anything else?" },
+        { "type": "success", "text": "Context saved for next session" }
+      ]
+    },
+    {
+      "id": "simple-chatbot",
+      "visible": true,
+      "featured": false,
+      "order": 3,
+      "title": "Simple Chatbot",
+      "problem": "Businesses needed a lightweight customisable chatbot for their website without complex infrastructure.",
+      "solution": "A clean embeddable chatbot with a Python LLM API backend. Configurable persona, custom FAQs and a simple web interface that drops into any site.",
+      "result": "Deployed as a widget on client sites. Handles common queries instantly, reducing manual response time.",
+      "tech": ["Python", "OpenAI API", "JavaScript", "HTML/CSS"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "prompt",  "text": "User: What are your working hours?" },
+        { "type": "out",     "text": "Bot: Mon-Sat, 9am to 6pm." },
+        { "type": "prompt",  "text": "User: Do you offer EMI?" },
+        { "type": "out",     "text": "Bot: Yes, 0% EMI on orders above 5000." },
+        { "type": "success", "text": "Response time: 1.2 s" }
+      ]
+    },
+    {
+      "id": "data-analyst-tool",
+      "visible": true,
+      "featured": false,
+      "order": 4,
+      "title": "AI Data Analyst Tool",
+      "problem": "Business owners had data in Excel and PDFs but no easy way to get answers, trends or charts without hiring a data analyst.",
+      "solution": "Upload any Excel or PDF file or add your company API key. The tool analyses the data, answers questions in plain English and generates charts and bar graphs automatically.",
+      "result": "Non-technical users can interrogate their own business data and get visual reports in seconds with no code required.",
+      "tech": ["Python", "Streamlit", "Pandas", "Plotly", "OpenAI API"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "prompt",  "text": "$ streamlit run analyst.py" },
+        { "type": "out",     "text": "File uploaded: sales_Q3.xlsx (1240 rows)" },
+        { "type": "out",     "text": "Query: Which product had highest growth?" },
+        { "type": "out",     "text": "Answer: Product B, 34% growth in Q3" },
+        { "type": "success", "text": "Bar chart generated" }
+      ]
+    },
+    {
+      "id": "smart-attendance",
+      "visible": true,
+      "featured": false,
+      "order": 5,
+      "title": "Smart Attendance System",
+      "problem": "Manual attendance registers were slow and error-prone, requiring someone to compile reports every month from paper sheets.",
+      "solution": "A web-based attendance system with face recognition or QR code check-in, automatic daily logs, monthly Excel reports and an admin dashboard.",
+      "result": "Attendance marking time reduced from 5 minutes to under 30 seconds per session. Reports generated automatically at month-end.",
+      "tech": ["Python", "OpenCV", "Flask", "MySQL", "JavaScript"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "prompt",  "text": "$ python attendance_server.py" },
+        { "type": "out",     "text": "Face recognised: Rahul Sharma" },
+        { "type": "out",     "text": "Marked present at 09:03 AM" },
+        { "type": "out",     "text": "Monthly sessions: 47 of 50" },
+        { "type": "success", "text": "Report exported: oct_attendance.xlsx" }
+      ]
+    },
+    {
+      "id": "portfolio",
+      "visible": true,
+      "featured": false,
+      "order": 6,
+      "title": "Developer Portfolio Website",
+      "problem": "Developers and freelancers needed a clean fast personal portfolio that showcases their work without paying for hosting.",
+      "solution": "A responsive portfolio website built with HTML, CSS and JavaScript, deployed free on GitHub Pages with project showcase, skills section and contact form.",
+      "result": "Zero-cost professional online presence deployed in under a day. Fully customisable and easy to update.",
+      "tech": ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "prompt",  "text": "$ git push origin main" },
+        { "type": "out",     "text": "Building portfolio site..." },
+        { "type": "out",     "text": "Projects loaded: 6 items" },
+        { "type": "out",     "text": "Contact form connected" },
+        { "type": "success", "text": "Live at username.github.io" }
+      ]
+    },
+    {
+      "id": "expenses-management",
+      "visible": true,
+      "featured": false,
+      "order": 7,
+      "title": "Expenses Management System",
+      "problem": "Small business owners tracked expenses in notebooks with no visibility into spending categories, monthly totals or budget limits.",
+      "solution": "A web application where users log expenses by category, set monthly budgets, view spending breakdowns as charts and export reports to Excel or PDF.",
+      "result": "Clear monthly spending visibility with automatic budget alerts. Users identified and reduced 20 to 30 percent of unnecessary recurring expenses.",
+      "tech": ["Python", "Flask", "MySQL", "Chart.js", "JavaScript"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "out",     "text": "October Budget: 50,000" },
+        { "type": "out",     "text": "Spent so far:   32,450 (64.9%)" },
+        { "type": "out",     "text": "Top category:   Operations 12,000" },
+        { "type": "out",     "text": "Alert: Travel over budget by 1,200" },
+        { "type": "success", "text": "Report exported: oct_expenses.pdf" }
+      ]
+    },
+    {
+      "id": "restaurant-billing",
+      "visible": true,
+      "featured": false,
+      "order": 8,
+      "title": "Restaurant Billing Software",
+      "problem": "A restaurant managed orders and bills on paper, leading to errors, slow service and no data on daily sales or popular items.",
+      "solution": "A web-based billing system with table management, menu builder, order taking, bill generation with GST and an end-of-day sales report.",
+      "result": "Order processing time cut by 40 percent. Daily sales reports generated automatically. Zero billing errors since deployment.",
+      "tech": ["PHP", "MySQL", "JavaScript", "HTML/CSS"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "kw",      "text": "Table 4 — New Order" },
+        { "type": "out",     "text": "2x Paneer Butter Masala  440" },
+        { "type": "out",     "text": "3x Garlic Naan           120" },
+        { "type": "out",     "text": "GST (5%):                  28" },
+        { "type": "success", "text": "Bill printed: 588 total" }
       ]
     },
     {
       "id": "python-automation",
       "visible": true,
       "featured": false,
-      "order": 2,
+      "order": 9,
       "title": "Daily Report Automation",
-      "problem": "Team spent 3 hours each morning copying order data from emails into Excel, then emailing a summary to managers.",
-      "solution": "Python script runs at 8 am via Windows Task Scheduler. Reads inbox, extracts structured data with regex, updates the master workbook and emails the formatted report.",
-      "result": "3-hour daily task reduced to 0 manual minutes. Script has run reliably for 90+ days.",
+      "problem": "Team spent 3 hours each morning copying order data from emails into Excel then emailing a summary to managers.",
+      "solution": "Python script runs at 8 am via Windows Task Scheduler. Reads inbox, extracts structured data, updates the master workbook and emails the formatted report.",
+      "result": "3-hour daily task reduced to 0 manual minutes. Script has run reliably for 90 plus days.",
       "tech": ["Python", "Pandas", "OpenPyXL", "SMTP", "IMAP"],
       "demoUrl": null,
       "githubUrl": null,
@@ -41,29 +188,28 @@
         { "type": "out",     "text": "Reading inbox (47 messages)..." },
         { "type": "out",     "text": "Extracted 312 order rows" },
         { "type": "out",     "text": "Updated master.xlsx" },
-        { "type": "out",     "text": "Report emailed to 3 managers" },
-        { "type": "success", "text": "Done in 6.1 s" }
+        { "type": "success", "text": "Report emailed. Done in 6.1 s" }
       ]
     },
     {
       "id": "api-platform",
       "visible": true,
       "featured": false,
-      "order": 3,
+      "order": 10,
       "title": "E-commerce API Integration",
       "problem": "Every Shopify order required manual steps: update ERP stock, send WhatsApp notification, log to Google Sheet.",
-      "solution": "Python webhook listener on VPS. On each new order: pushes to ERP via REST, fires WhatsApp Business API message, appends row to Google Sheet.",
-      "result": "3 manual steps per order eliminated. Integration handles 200+ orders per day without intervention.",
+      "solution": "Python webhook listener on VPS. On each new order it pushes to ERP via REST, fires WhatsApp Business API message and appends row to Google Sheet.",
+      "result": "3 manual steps per order eliminated. Integration handles 200 plus orders per day without intervention.",
       "tech": ["Python", "REST APIs", "Webhooks", "PHP"],
       "demoUrl": null,
       "githubUrl": null,
       "images": [],
       "terminalLines": [
         { "type": "kw",      "text": "POST /webhook/order-created" },
-        { "type": "out",     "text": "→ ERP stock update [200 OK, 41ms]" },
-        { "type": "out",     "text": "→ WhatsApp notify [200 OK, 28ms]" },
-        { "type": "out",     "text": "→ Sheets log [200 OK, 19ms]" },
-        { "type": "success", "text": "✓ All 3 systems synced" }
+        { "type": "out",     "text": "ERP stock update [200 OK, 41ms]" },
+        { "type": "out",     "text": "WhatsApp notify [200 OK, 28ms]" },
+        { "type": "out",     "text": "Sheets log [200 OK, 19ms]" },
+        { "type": "success", "text": "All 3 systems synced" }
       ]
     }
   ]
