@@ -469,15 +469,41 @@ const Reveal = (() => {
 
 /* ── 4. MODALS ───────────────────────────────────────────── */
 const Modals = (() => {
-  function show(id) { const o=document.getElementById(id); if(!o) return; o.removeAttribute('hidden'); document.body.style.overflow='hidden'; requestAnimationFrame(()=>o.querySelector('.modal-close')?.focus()); }
-  function hide(id) { const o=document.getElementById(id); if(!o) return; o.setAttribute('hidden',''); document.body.style.overflow=''; }
-  function init() {
-    document.getElementById('service-modal-close')?.addEventListener('click',()=>hide('service-modal'));
-    document.getElementById('project-modal-close')?.addEventListener('click',()=>hide('project-modal'));
-    $$('.modal-overlay').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)hide(el.id);}));
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'){hide('service-modal');hide('project-modal');}});
+  let openCount = 0;
+
+  function show(id) {
+    const o = document.getElementById(id);
+    if (!o) return;
+    o.removeAttribute('hidden');
+    openCount++;
+    document.body.classList.add('modal-open');
+    requestAnimationFrame(() => o.querySelector('.modal-close')?.focus());
   }
-  return { init, show, hide };
+
+  function hide(id) {
+    const o = document.getElementById(id);
+    if (!o) return;
+    o.setAttribute('hidden', '');
+    openCount = Math.max(0, openCount - 1);
+    if (openCount === 0) document.body.classList.remove('modal-open');
+  }
+
+  function hideAll() {
+    $$('.modal-overlay:not([hidden])').forEach(el => {
+      el.setAttribute('hidden', '');
+    });
+    openCount = 0;
+    document.body.classList.remove('modal-open');
+  }
+
+  function init() {
+    document.getElementById('service-modal-close')?.addEventListener('click', () => hide('service-modal'));
+    document.getElementById('project-modal-close')?.addEventListener('click', () => hide('project-modal'));
+    $$('.modal-overlay').forEach(el => el.addEventListener('click', e => { if (e.target === el) hide(el.id); }));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') hideAll(); });
+  }
+
+  return { init, show, hide, hideAll };
 })();
 
 /* ── 5. REQUEST SERVICE (smart prefill) ──────────────────── */
