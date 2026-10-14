@@ -483,23 +483,148 @@ const Modals = (() => {
 /* ── 5. REQUEST SERVICE (smart prefill) ──────────────────── */
 function requestService(serviceName) {
   Modals.hide('service-modal');
-  const contact = document.getElementById('contact');
-  if (contact) window.scrollTo({top:contact.getBoundingClientRect().top+window.scrollY-CONFIG.SCROLL_OFFSET,behavior:'smooth'});
-  setTimeout(() => {
-    const sel = document.getElementById('serviceRequired');
-    if (!sel) return;
-    const match = Array.from(sel.options).find(o=>o.value===serviceName||o.value.toLowerCase().includes(serviceName.toLowerCase()));
-    if (match) {
-      sel.value = match.value;
-      sel.dispatchEvent(new Event('change',{bubbles:true}));
-      sel.style.borderColor='var(--blue)';
-      sel.style.boxShadow='0 0 0 3px var(--blue-dim)';
-      setTimeout(()=>{sel.style.borderColor='';sel.style.boxShadow='';},2500);
-    }
-    document.getElementById('fullName')?.focus();
-  }, 650);
+  openEnquiryModal(null, serviceName);
 }
 window.requestService = requestService;
+
+/* ── 5b. ENQUIRY POPUP MODAL ─────────────────────────────── */
+function openEnquiryModal(event, preselect) {
+  if (event) event.preventDefault();
+  /* Prefill service if passed */
+  if (preselect) {
+    const sel = document.getElementById('eq-serviceRequired');
+    if (sel) {
+      const match = Array.from(sel.options).find(o => o.value === preselect || o.value.toLowerCase().includes(preselect.toLowerCase()));
+      if (match) sel.value = match.value;
+    }
+  }
+  /* Hide any previous messages */
+  const suc = document.getElementById('eq-form-success');
+  const err = document.getElementById('eq-form-error');
+  if (suc) suc.setAttribute('hidden', '');
+  if (err) err.setAttribute('hidden', '');
+  Modals.show('enquiry-modal');
+  /* Focus first field */
+  setTimeout(() => document.getElementById('eq-fullName')?.focus(), 100);
+}
+window.openEnquiryModal = openEnquiryModal;
+
+/* Enquiry modal form submit */
+(function initEnquiryModal() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('enquiry-modal-form');
+    if (!form) return;
+
+    /* Close button */
+    document.getElementById('enquiry-modal-close')?.addEventListener('click', () => Modals.hide('enquiry-modal'));
+    document.getElementById('enquiry-modal')?.addEventListener('click', function(e) {
+      if (e.target === this) Modals.hide('enquiry-modal');
+    });
+
+    /* Clear errors on input */
+    form.querySelectorAll('.form-input,.form-select,.form-textarea').forEach(f => {
+      f.addEventListener('input',  () => { f.classList.remove('error'); f.parentElement.querySelectorAll('.field-error').forEach(e => e.remove()); });
+      f.addEventListener('change', () => { f.classList.remove('error'); f.parentElement.querySelectorAll('.field-error').forEach(e => e.remove()); });
+    });
+
+    let submitting = false;
+    let lastKey = null;
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (submitting) return;
+
+      const suc  = document.getElementById('eq-form-success');
+      const err  = document.getElementById('eq-form-error');
+      const etxt = document.getElementById('eq-error-text');
+      const btn  = document.getElementById('eq-submit-btn');
+      const btxt = document.getElementById('eq-btn-text');
+      const spin = document.getElementById('eq-btn-spinner');
+
+      suc?.setAttribute('hidden', '');
+      err?.setAttribute('hidden', '');
+      form.querySelectorAll('.error').forEach(f => f.classList.remove('error'));
+      form.querySelectorAll('.field-error').forEach(f => f.remove());
+
+      /* Honeypot */
+      if (document.getElementById('eq-hp')?.value) return;
+
+      const g = id => (document.getElementById(id)?.value || '').trim();
+      const data = {
+        fullName:        g('eq-fullName'),
+        companyName:     g('eq-companyName'),
+        email:           g('eq-email'),
+        phone:           g('eq-phone'),
+        serviceRequired: g('eq-serviceRequired'),
+        budget:          g('eq-budget'),
+        projectDetails:  g('eq-projectDetails'),
+      };
+
+      /* Validate */
+      const errors = [];
+      if (!data.fullName || data.fullName.length < 2)                errors.push({ id: 'eq-fullName',        msg: 'Please enter your full name.' });
+      if (!data.email)                                               errors.push({ id: 'eq-email',           msg: 'Please enter your email address.' });
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))     errors.push({ id: 'eq-email',           msg: 'Please enter a valid email address.' });
+      if (!data.serviceRequired)                                     errors.push({ id: 'eq-serviceRequired', msg: 'Please select a service.' });
+      if (!data.projectDetails || data.projectDetails.length < 10)  errors.push({ id: 'eq-projectDetails',  msg: 'Please add a little more detail.' });
+
+      if (errors.length) {
+        errors.forEach(({ id, msg }) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.classList.add('error');
+          const sp = document.createElement('span');
+          sp.className = 'field-error';
+          sp.textContent = msg;
+          sp.setAttribute('role', 'alert');
+          sp.style.cssText = 'display:block;font-size:.73rem;color:var(--err, #DC2626);margin-top:4px;font-weight:500';
+          el.parentElement.appendChild(sp);
+        });
+        document.getElementById(errors[0].id)?.focus();
+        return;
+      }
+
+      /* Duplicate guard */
+      const key = `${data.email}|${data.projectDetails}`.toLowerCase().trim();
+      if (lastKey === key) {
+        if (etxt) etxt.textContent = 'This enquiry was already submitted.';
+        err?.removeAttribute('hidden');
+        return;
+      }
+
+      submitting = true;
+      btn.disabled = true;
+      btxt.textContent = 'Sending…';
+      spin?.removeAttribute('hidden');
+
+      try {
+        const url = CONFIG.GOOGLE_SCRIPT_URL;
+        if (!url || url.includes('YOUR_')) throw new Error('NOT_CONFIGURED');
+        const payload = new URLSearchParams({ ...data, source: 'Website' });
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 12000);
+        try {
+          await fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: payload.toString(), signal: ctrl.signal });
+        } finally { clearTimeout(timer); }
+
+        lastKey = key;
+        suc?.removeAttribute('hidden');
+        form.reset();
+      } catch (ex) {
+        let msg = 'Something went wrong. Please try again or email us at <a href="mailto:jadootechenterprises@gmail.com">jadootechenterprises@gmail.com</a>.';
+        if (ex.name === 'AbortError') msg = 'Request timed out. Please try again.';
+        if (!navigator.onLine)       msg = 'You appear to be offline.';
+        if (etxt) etxt.innerHTML = msg;
+        err?.removeAttribute('hidden');
+      } finally {
+        submitting = false;
+        btn.disabled = false;
+        btxt.textContent = 'Send Enquiry';
+        spin?.setAttribute('hidden', '');
+      }
+    });
+  });
+})();
 
 /* ── 6. CONTACT FORM ─────────────────────────────────────── */
 const Form = (() => {
