@@ -1,0 +1,24 @@
+{
+  "kicker": "Digital solutions for a smarter tomorrow",
+  "headline": "Build. Automate. Grow.",
+  "headlineAccent": "Automate.",
+  "subtext": "Websites, automation and digital systems built around the way your business actually works.",
+  "ctaPrimary": { "label": "Start a Project →", "href": "#contact" },
+  "ctaSecondary": { "label": "See Our Work", "href": "#work" },
+  "tags": [
+    { "label": "Website Development",       "href": "#services", "icon": "monitor" },
+    { "label": "Web Application Development","href": "#services", "icon": "code" },
+    { "label": "Python Automation",         "href": "#services", "icon": "terminal" },
+    { "label": "AI Solutions",              "href": "#services", "icon": "brain" },
+    { "label": "API Integration",           "href": "#services", "icon": "link" }
+  ],
+  "metrics": [
+    { "value": "Live",   "label": "Deployed Projects", "icon": "activity" },
+    { "value": "Custom", "label": "Built to spec",      "icon": "shield" },
+    { "value": "Fast",   "label": "Delivery",           "icon": "zap" }
+  ],
+  "codeCard": {
+    "filename": "project_setup.py",
+    "annotation": "Your\nIdeas\nOur Code\nReal Results."
+  }
+}

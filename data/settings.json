@@ -1,0 +1,24 @@
+{
+  "theme": {
+    "default": "light",
+    "accentColor": "#1A56DB",
+    "navyColor": "#0D1B2A",
+    "bgColor": "#F7F4EF",
+    "fontDisplay": "Playfair Display",
+    "fontBody": "Inter",
+    "availableFonts": [
+      "Playfair Display",
+      "Merriweather",
+      "Lora",
+      "Source Serif 4"
+    ]
+  },
+  "sections": {
+    "hero": true,
+    "services": true,
+    "work": true,
+    "about": true,
+    "process": true,
+    "contact": true
+  }
+}

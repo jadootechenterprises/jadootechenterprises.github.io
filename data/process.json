@@ -1,0 +1,36 @@
+{
+  "heading": "How We Work",
+  "subtext": "A clear five-step process from first conversation to deployed product.",
+  "example": {
+    "label": "A real example",
+    "quote": "\"Our team spends three hours every morning copying order data from emails into Excel, then sending the summary to managers.\"",
+    "result": "A Python script now reads the inbox at 8 am, pulls out the structured data, updates the master workbook and emails the formatted report to three managers. The three-hour task takes zero minutes of human time."
+  },
+  "steps": [
+    {
+      "number": "01",
+      "title": "Discover",
+      "description": "We listen to your problem, ask the right questions and map out exactly what needs to be built."
+    },
+    {
+      "number": "02",
+      "title": "Plan",
+      "description": "We choose the right technology and create a clear plan before writing a single line of code."
+    },
+    {
+      "number": "03",
+      "title": "Build",
+      "description": "We develop and test iteratively. You see progress throughout, not just a finished product at the end."
+    },
+    {
+      "number": "04",
+      "title": "Test",
+      "description": "You run it in your real environment. We fix anything that does not work as expected."
+    },
+    {
+      "number": "05",
+      "title": "Launch",
+      "description": "We deploy, document and stay available for questions, tweaks and future additions."
+    }
+  ]
+}

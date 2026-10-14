@@ -1,0 +1,10 @@
+{
+  "heading": "Tools We Work With",
+  "subtext": "We pick the right tool for the job.",
+  "items": [
+    "Python", "PHP", "Laravel", "JavaScript",
+    "HTML5", "CSS3", "MySQL", "REST APIs",
+    "Selenium", "Pandas", "NumPy", "Streamlit",
+    "Plotly", "LLM APIs"
+  ]
+}

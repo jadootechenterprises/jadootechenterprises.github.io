@@ -1,0 +1,70 @@
+{
+  "heading": "Work",
+  "kicker": "What We've Built",
+  "subtext": "Three projects that are live or recently completed. Each one started with a real business problem.",
+  "items": [
+    {
+      "id": "this-site",
+      "visible": true,
+      "featured": true,
+      "order": 1,
+      "title": "JadooTech Enterprises Website",
+      "problem": "Needed a zero-cost lead-capture site that works without a backend.",
+      "solution": "Static HTML/CSS/JS site on GitHub Pages with Google Apps Script handling form submissions to a private Google Sheet.",
+      "result": "Live at jadootechenterprises.github.io. Enquiries land directly in Google Sheets as structured rows.",
+      "tech": ["HTML5", "CSS3", "JavaScript", "GitHub Pages", "Google Apps Script"],
+      "demoUrl": "https://jadootechenterprises.github.io/",
+      "githubUrl": "https://github.com/jadootechenterprises/jadootechenterprises.github.io",
+      "images": [],
+      "terminalLines": [
+        { "type": "prompt",  "text": "$ git push origin main" },
+        { "type": "out",     "text": "Branch 'main' → origin/main" },
+        { "type": "out",     "text": "GitHub Pages build triggered" },
+        { "type": "success", "text": "Live at jadootechenterprises.github.io" }
+      ]
+    },
+    {
+      "id": "python-automation",
+      "visible": true,
+      "featured": false,
+      "order": 2,
+      "title": "Daily Report Automation",
+      "problem": "Team spent 3 hours each morning copying order data from emails into Excel, then emailing a summary to managers.",
+      "solution": "Python script runs at 8 am via Windows Task Scheduler. Reads inbox, extracts structured data with regex, updates the master workbook and emails the formatted report.",
+      "result": "3-hour daily task reduced to 0 manual minutes. Script has run reliably for 90+ days.",
+      "tech": ["Python", "Pandas", "OpenPyXL", "SMTP", "IMAP"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "prompt",  "text": "$ python daily_report.py" },
+        { "type": "out",     "text": "Reading inbox (47 messages)..." },
+        { "type": "out",     "text": "Extracted 312 order rows" },
+        { "type": "out",     "text": "Updated master.xlsx" },
+        { "type": "out",     "text": "Report emailed to 3 managers" },
+        { "type": "success", "text": "Done in 6.1 s" }
+      ]
+    },
+    {
+      "id": "api-platform",
+      "visible": true,
+      "featured": false,
+      "order": 3,
+      "title": "E-commerce API Integration",
+      "problem": "Every Shopify order required manual steps: update ERP stock, send WhatsApp notification, log to Google Sheet.",
+      "solution": "Python webhook listener on VPS. On each new order: pushes to ERP via REST, fires WhatsApp Business API message, appends row to Google Sheet.",
+      "result": "3 manual steps per order eliminated. Integration handles 200+ orders per day without intervention.",
+      "tech": ["Python", "REST APIs", "Webhooks", "PHP"],
+      "demoUrl": null,
+      "githubUrl": null,
+      "images": [],
+      "terminalLines": [
+        { "type": "kw",      "text": "POST /webhook/order-created" },
+        { "type": "out",     "text": "→ ERP stock update [200 OK, 41ms]" },
+        { "type": "out",     "text": "→ WhatsApp notify [200 OK, 28ms]" },
+        { "type": "out",     "text": "→ Sheets log [200 OK, 19ms]" },
+        { "type": "success", "text": "✓ All 3 systems synced" }
+      ]
+    }
+  ]
+}

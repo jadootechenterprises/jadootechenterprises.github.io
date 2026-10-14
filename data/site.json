@@ -1,0 +1,35 @@
+{
+  "brand": {
+    "name": "JadooTech Enterprises",
+    "tagline": "Technology Solutions for Modern Businesses",
+    "logoUrl": "assets/logo/jadootech-logo.png",
+    "faviconUrl": "assets/logo/jadootech-logo.png"
+  },
+  "contact": {
+    "phone": "+917668690613",
+    "phoneDisplay": "+91 76686 90613",
+    "email": "jadootechenterprises@gmail.com",
+    "whatsapp": "917668690613",
+    "whatsappMessage": "Hi, I want to discuss a project.",
+    "address": ""
+  },
+  "social": {
+    "github": "https://github.com/jadootechenterprises",
+    "linkedin": "https://linkedin.com/company/jadootechenterprises",
+    "instagram": "https://instagram.com/jadootechenterprises",
+    "twitter": "",
+    "facebook": ""
+  },
+  "seo": {
+    "title": "JadooTech Enterprises — Web Development, Automation & AI Solutions",
+    "description": "JadooTech Enterprises builds websites, web applications, Python automation systems and AI tools for small and growing businesses.",
+    "ogImage": "https://jadootechenterprises.github.io/assets/logo/jadootech-logo.png",
+    "canonicalUrl": "https://jadootechenterprises.github.io/"
+  },
+  "footer": {
+    "text": "Technology solutions for modern businesses.",
+    "copyright": "JadooTech Enterprises. All rights reserved.",
+    "note": "Built with HTML, CSS and JavaScript."
+  },
+  "formEndpoint": "https://script.google.com/macros/s/AKfycbxxVb6VneNQ3oR1GtwliWMkhUSPuxapBrOuGmxIRwmCz2Rnu1bT_qdLSy4AzDz66QT9hQ/exec"
+}

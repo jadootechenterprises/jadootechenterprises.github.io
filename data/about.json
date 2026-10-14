@@ -1,0 +1,19 @@
+{
+  "heading": "About JadooTech Enterprises",
+  "kicker": "Who We Are",
+  "paragraphs": [
+    "We build digital products for businesses that have a specific problem and want it solved properly. No packages, no upselling, no generic templates. We talk to you, understand what you actually need and build that.",
+    "The work covers websites, web applications, Python automation, API integrations and AI tools. If it runs in a browser or on a server and saves your team time, we can probably build it."
+  ],
+  "ctaLabel": "Discuss Your Project",
+  "ctaHref": "#contact",
+  "card": {
+    "tagline": "Technology Solutions\nfor Modern Businesses",
+    "pillars": [
+      { "icon": "🌐", "label": "Web" },
+      { "icon": "🤖", "label": "AI" },
+      { "icon": "⚡", "label": "Auto" },
+      { "icon": "🔗", "label": "APIs" }
+    ]
+  }
+}
