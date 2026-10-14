@@ -1,6 +1,122 @@
 # JadooTech Enterprises — Website
 
 **Live:** https://jadootechenterprises.github.io/  
+**Admin:** https://jadootechenterprises.github.io/admin/  
+**Stack:** HTML5, CSS3, Vanilla JS — GitHub Pages (zero backend)
+
+---
+
+## Admin Panel — Setup & Login
+
+### One-time: create a GitHub Personal Access Token
+
+1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
+2. Click **Generate new token**
+3. Set:
+   - **Token name:** JadooTech Admin
+   - **Expiration:** 90 days (recommended)
+   - **Repository access:** Only select repositories → `jadootechenterprises.github.io`
+   - **Permissions → Contents:** Read and Write
+4. Click **Generate token** and copy it immediately (shown only once)
+
+### Login
+
+1. Go to **https://jadootechenterprises.github.io/admin/**
+2. Paste your GitHub token into the "Personal Access Token" field
+3. Click **Sign In with Token**
+
+The token is stored only in your browser's `sessionStorage`. It is never saved to disk, never committed, never sent anywhere except `api.github.com`. It disappears when you close the tab. Auto-logout happens after 30 minutes of inactivity.
+
+### Dev login (localhost only)
+
+For local testing without a real token, use **Dev Login** tab:
+- Username: `admin`  
+- Password: `admin`
+
+This only works on `localhost` and does not have GitHub API access (read-only UI preview).
+
+---
+
+## Security notes
+
+- **The admin URL is not secret.** Real protection comes from the GitHub token.
+- Use a **fine-grained token** limited to this one repository only.
+- Set a **90-day expiry** and revoke immediately if a device is lost.
+- The admin panel has `noindex,nofollow` meta tags and is excluded from `robots.txt` and `sitemap.xml`.
+- All user-entered text is sanitised before rendering (no raw HTML injection).
+- Token is never logged or echoed.
+
+---
+
+## Editing content
+
+**All content lives in `/data/*.json`.** You do not need to touch `index.html` for routine updates. Use the Admin Panel or edit the JSON files directly.
+
+| File | Controls |
+|---|---|
+| `data/site.json`     | Brand name, logo, phone, email, WhatsApp, social links, SEO title/description, footer text, form endpoint |
+| `data/home.json`     | Hero headline, subtext, CTA buttons, service tags, metrics card |
+| `data/services.json` | All 10 services — title, description, tech tags, visible/hidden, order |
+| `data/projects.json` | All 3 projects — problem, solution, result, tech, links, featured flag |
+| `data/about.json`    | About heading, paragraphs, card tagline |
+| `data/process.json`  | 5 process steps, real example quote and result |
+| `data/tools.json`    | Tech stack chips |
+| `data/settings.json` | Accent colour, heading font, light/dark default, section visibility |
+
+---
+
+## Admin Panel features
+
+- **Dashboard** — last commit time, quick links, view live site
+- **Site Settings** — brand, contact, social, SEO, footer, form endpoint
+- **Hero** — all text, CTA buttons, service tags, metrics
+- **Services** — add/edit/delete/reorder, show/hide toggle, tech tags, includes list
+- **Projects** — add/edit/delete/reorder, featured flag, show/hide
+- **About, Process, Tools** — edit all text
+- **Theme** — accent colour picker, heading font, dark/light default
+- **Section Visibility** — toggle entire sections on/off
+- **Media Library** — upload images (auto-converted to WebP, max 1600px), delete, copy path
+- **Version History** — view last 20 commits per file, one-click restore
+
+---
+
+## Deployment
+
+```bash
+git add .
+git commit -m "Your message"
+git push origin main
+```
+
+GitHub Pages builds automatically. Changes go live in ~1–2 minutes.
+
+---
+
+## Running Lighthouse
+
+```bash
+# CLI
+npm install -g lighthouse
+lighthouse https://jadootechenterprises.github.io/ --view
+```
+
+Or: Chrome DevTools → Lighthouse tab → Analyse page load.
+
+---
+
+## Contact form
+
+The form posts to Google Apps Script. Enquiries are saved to your [Google Sheet](https://docs.google.com/spreadsheets/d/1Jv7NJhN-TXhAnxDjzscMLJDAUshOR14PsYfok8f7WrI/edit). You can change the form endpoint URL from the Admin Panel → Site Settings.
+
+---
+
+## Contact
+
+- **Email:** jadootechenterprises@gmail.com  
+- **Phone:** +91 76686 90613  
+- **GitHub:** https://github.com/jadootechenterprises
+
+**Live:** https://jadootechenterprises.github.io/  
 **Stack:** HTML5, CSS3, Vanilla JS — hosted on GitHub Pages (zero backend)
 
 ---
