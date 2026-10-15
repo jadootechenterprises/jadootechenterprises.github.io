@@ -57,7 +57,7 @@
   --t-xl:   clamp(1.35rem, 2.2vw, 1.625rem);
   --t-2xl:  clamp(1.75rem, 3.5vw, 2.375rem);
   --t-3xl:  clamp(2.5rem,  5.5vw, 3.75rem);
-  --t-hero: clamp(3.25rem, 8vw,   5.5rem);
+  --t-hero: clamp(3.25rem, min(8vw, 13vh), 5.5rem);
 
   /* Space */
   --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem;
@@ -110,7 +110,7 @@
 
 /* ── 2. RESET ─────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
 body{
   font-family:var(--f-body);font-size:var(--t-base);line-height:1.65;
   color:var(--text-2);background:var(--bg);overflow-x:hidden;
@@ -244,8 +244,8 @@ h1,h2,h3,h4,h5,h6{font-family:var(--f-display);font-weight:700;color:var(--text)
 
 /* ── 6. HERO ──────────────────────────────────────────────── */
 .hero{
-  padding-top:calc(var(--nav-h) + var(--s12));
-  padding-bottom:var(--s16);
+  padding-top:calc(var(--nav-h) + var(--s8));
+  padding-bottom:var(--s12);
   background:var(--bg);overflow:hidden;
 }
 .hero-inner{
@@ -310,13 +310,18 @@ h1,h2,h3,h4,h5,h6{font-family:var(--f-display);font-weight:700;color:var(--text)
 .cc-filename{font-family:var(--f-mono);font-size:.7rem;color:rgba(255,255,255,.28);margin-left:auto}
 .cc-body{padding:var(--s5);counter-reset:ln}
 .cc-line{
-  display:flex;align-items:baseline;gap:var(--s4);
-  font-family:var(--f-mono);font-size:12.5px;line-height:1.9
+  display:block;position:relative;
+  padding-left:2.4rem;
+  white-space:pre;
+  font-family:var(--f-mono);font-size:12.5px;line-height:1.9;
+  overflow:hidden;text-overflow:ellipsis;
 }
 .cc-line::before{
   counter-increment:ln;content:counter(ln);
-  min-width:1.4rem;color:rgba(255,255,255,.2);font-size:10px;text-align:right;flex-shrink:0
+  position:absolute;left:0;width:1.4rem;
+  color:rgba(255,255,255,.2);font-size:10px;text-align:right;
 }
+.cc-line-blank{padding-left:2.4rem}
 .cc-line-blank::before{content:''}
 .lc {color:#D4D0C8}
 .lc-comment{color:#5C6370;font-style:italic}
@@ -566,10 +571,10 @@ h1,h2,h3,h4,h5,h6{font-family:var(--f-display);font-weight:700;color:var(--text)
 /* Prevent background scroll when any modal is open */
 body.modal-open{overflow:hidden;}
 html:has(body.modal-open){overflow:hidden;}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:flex;align-items:center;justify-content:center;padding:var(--s6);opacity:0;transition:opacity .2s ease;pointer-events:none}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:flex;align-items:center;justify-content:center;padding:var(--s6);opacity:0;transition:opacity .2s ease;pointer-events:none;overscroll-behavior:contain;}
 .modal-overlay:not([hidden]){opacity:1;pointer-events:auto}
 .modal-overlay[hidden]{display:none}
-.modal-box{background:var(--surf);border:1.5px solid var(--bdr-s);border-radius:var(--r-xl);width:100%;max-width:560px;max-height:88vh;overflow-y:auto;box-shadow:var(--sh-lg);transform:translateY(12px) scale(.98);transition:transform .2s ease;scrollbar-width:thin;scrollbar-color:var(--bdr) transparent}
+.modal-box{background:var(--surf);border:1.5px solid var(--bdr-s);border-radius:var(--r-xl);width:100%;max-width:560px;max-height:88vh;overflow-y:auto;box-shadow:var(--sh-lg);transform:translateY(12px) scale(.98);transition:transform .2s ease;scrollbar-width:thin;scrollbar-color:var(--bdr) transparent;overscroll-behavior:contain;}
 .modal-overlay:not([hidden]) .modal-box{transform:none}
 .modal-box--wide{max-width:660px}
 .modal-close{position:sticky;top:var(--s4);float:right;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);color:var(--text-3);background:var(--bg-2);border:1px solid var(--bdr);transition:color var(--ease),background var(--ease);z-index:10;margin:var(--s4) var(--s4) 0 0}

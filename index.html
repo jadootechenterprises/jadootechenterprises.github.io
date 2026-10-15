@@ -81,7 +81,7 @@
         <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
-      <a href="#contact" class="btn btn-primary btn-sm" id="nav-cta" onclick="openEnquiryModal(event)">Start a Project →</a>
+      <a href="#contact" class="btn btn-primary btn-sm" id="nav-cta" data-open-modal onclick="openEnquiryModal(event)">Start a Project →</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -96,7 +96,7 @@
     <a href="#about"    class="mobile-link">About</a>
     <a href="#process"  class="mobile-link">Process</a>
     <a href="#contact"  class="mobile-link">Contact</a>
-    <a href="#contact"  class="btn btn-primary mobile-cta" onclick="openEnquiryModal(event)">Start a Project</a>
+    <a href="#contact"  class="btn btn-primary mobile-cta" data-open-modal onclick="openEnquiryModal(event)">Start a Project</a>
   </nav>
 </header>
 
@@ -115,7 +115,7 @@
           </h1>
           <p class="hero-sub" id="hero-sub">Websites, automation and digital systems built around the way your business actually works.</p>
           <div class="hero-btns">
-            <a href="#contact"  class="btn btn-primary btn-lg" id="hero-cta-primary" onclick="openEnquiryModal(event)">Start a Project →</a>
+            <a href="#contact"  class="btn btn-primary btn-lg" id="hero-cta-primary" data-open-modal onclick="openEnquiryModal(event)">Start a Project →</a>
             <a href="#work"     class="btn btn-outline  btn-lg" id="hero-cta-secondary">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
               See Our Work
@@ -142,15 +142,15 @@
               <div class="cc-line"><span class="lc-comment"># JadooTech Enterprises - Project Setup</span></div>
               <div class="cc-line"><span class="lc-kw">from</span> <span class="lc-var">jadootech</span> <span class="lc-kw">import</span> <span class="lc-fn">Project</span></div>
               <div class="cc-line cc-line-blank"></div>
-              <div class="cc-line"><span class="lc-var">project</span> <span class="lc-punc">= </span><span class="lc-fn">Project</span><span class="lc-punc">(</span></div>
-              <div class="cc-line"><span class="lc-prop" style="padding-left:1.4rem">client</span><span class="lc-punc">="</span><span class="lc-str">Your Business</span><span class="lc-punc">",</span></div>
-              <div class="cc-line"><span class="lc-prop" style="padding-left:1.4rem">type</span><span class="lc-punc">="</span><span class="lc-str">web</span><span class="lc-punc">",</span></div>
-              <div class="cc-line"><span class="lc-prop" style="padding-left:1.4rem">services</span><span class="lc-punc">=[</span></div>
-              <div class="cc-line"><span class="lc-str" style="padding-left:2.8rem">"website"</span><span class="lc-punc">,</span></div>
-              <div class="cc-line"><span class="lc-str" style="padding-left:2.8rem">"automation"</span><span class="lc-punc">,</span></div>
-              <div class="cc-line"><span class="lc-str" style="padding-left:2.8rem">"ai"</span><span class="lc-punc">,</span></div>
-              <div class="cc-line"><span class="lc-str" style="padding-left:2.8rem">"api-integration"</span></div>
-              <div class="cc-line"><span class="lc-punc" style="padding-left:1.4rem">]</span></div>
+              <div class="cc-line"><span class="lc-var">project</span><span class="lc-punc"> = </span><span class="lc-fn">Project</span><span class="lc-punc">(</span></div>
+              <div class="cc-line"><span class="lc-prop">    client</span><span class="lc-punc">="</span><span class="lc-str">Your Business</span><span class="lc-punc">",</span></div>
+              <div class="cc-line"><span class="lc-prop">    type</span><span class="lc-punc">="</span><span class="lc-str">web</span><span class="lc-punc">",</span></div>
+              <div class="cc-line"><span class="lc-prop">    services</span><span class="lc-punc">=[</span></div>
+              <div class="cc-line"><span class="lc-str">        "website"</span><span class="lc-punc">,</span></div>
+              <div class="cc-line"><span class="lc-str">        "automation"</span><span class="lc-punc">,</span></div>
+              <div class="cc-line"><span class="lc-str">        "ai"</span><span class="lc-punc">,</span></div>
+              <div class="cc-line"><span class="lc-str">        "api-integration"</span></div>
+              <div class="cc-line"><span class="lc-punc">    ]</span></div>
               <div class="cc-line"><span class="lc-punc">)</span></div>
               <div class="cc-line"><span class="lc-var">project</span><span class="lc-punc">.</span><span class="lc-fn">build</span><span class="lc-punc">()</span></div>
               <div class="cc-line"><span class="lc-comment"># Ideas into digital solutions</span></div>
@@ -190,7 +190,7 @@
           <p class="svc-kicker"    id="svc-kicker">Our Services</p>
           <h2 class="svc-heading"  id="svc-heading">Services</h2>
           <p class="svc-sub"       id="svc-sub">Five core services to help you build, automate and scale your business with the right technology.</p>
-          <a href="#contact" class="svc-promo" onclick="openEnquiryModal(event)">
+          <a href="#contact" class="svc-promo" data-open-modal onclick="openEnquiryModal(event)">
             <div class="svc-promo-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
             </div>
@@ -243,7 +243,7 @@
             </div>
           </div>
           <div style="margin-top:var(--s8)">
-            <a href="#contact" class="btn btn-primary" id="about-cta" onclick="openEnquiryModal(event)">Discuss Your Project</a>
+            <a href="#contact" class="btn btn-primary" id="about-cta" data-open-modal onclick="openEnquiryModal(event)">Discuss Your Project</a>
           </div>
         </div>
         <div class="reveal reveal-delay-1" aria-hidden="true">
@@ -315,7 +315,7 @@
         <div class="cta-orb" aria-hidden="true"></div>
         <h2 class="cta-heading" id="cta-heading">Have a problem to solve?</h2>
         <p class="cta-desc" id="cta-desc">Tell us what you need. We will tell you whether we can build it, how long it will take and what it will cost.</p>
-        <a href="#contact" class="btn btn-primary btn-lg" onclick="openEnquiryModal(event)">Start a Project →</a>
+        <a href="#contact" class="btn btn-primary btn-lg" data-open-modal onclick="openEnquiryModal(event)">Start a Project →</a>
       </div>
     </div>
   </section>

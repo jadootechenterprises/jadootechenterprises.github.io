@@ -181,8 +181,8 @@ function renderHome(home) {
   }
 
   /* CTAs */
-  if (home.ctaPrimary?.label)   { const el = document.getElementById('hero-cta-primary');   if (el) { el.textContent = home.ctaPrimary.label; el.href = home.ctaPrimary.href || '#contact'; } }
-  if (home.ctaSecondary?.label) { const el = document.getElementById('hero-cta-secondary'); if (el) { el.querySelector('svg')?.insertAdjacentText('afterend', ` ${home.ctaSecondary.label}`); el.href = home.ctaSecondary.href || '#work'; } }
+  if (home.ctaPrimary?.label)   { const el = document.getElementById('hero-cta-primary');   if (el) el.href = home.ctaPrimary.href || '#contact'; }
+  if (home.ctaSecondary?.label) { const el = document.getElementById('hero-cta-secondary'); if (el) el.href = home.ctaSecondary.href || '#work'; }
 
   /* Tags */
   if (home.tags?.length) {
@@ -431,6 +431,7 @@ const Nav = (() => {
     const links    = $$('.nav-link');
     if (!sections.length||!links.length) return;
     const set = () => {
+      if (Modals.isOpen()) return; // pause while any modal is open
       let cur='';
       sections.forEach(s => { if (window.scrollY>=s.offsetTop-CONFIG.SCROLL_OFFSET-10) cur=s.id; });
       links.forEach(l => l.classList.toggle('active', l.getAttribute('href')===`#${cur}`));
@@ -470,14 +471,19 @@ const Reveal = (() => {
 /* ── 4. MODALS ───────────────────────────────────────────── */
 const Modals = (() => {
   let openCount = 0;
+  let _lastFocus = null; // element that triggered the modal, restored on close
 
-  function show(id) {
+  function show(id, triggerEl) {
     const o = document.getElementById(id);
     if (!o) return;
+    _lastFocus = triggerEl || document.activeElement;
     o.removeAttribute('hidden');
     openCount++;
     document.body.classList.add('modal-open');
-    requestAnimationFrame(() => o.querySelector('.modal-close')?.focus());
+    requestAnimationFrame(() => {
+      const first = o.querySelector('.modal-close, input, select, textarea, [tabindex]');
+      first?.focus();
+    });
   }
 
   function hide(id) {
@@ -485,16 +491,22 @@ const Modals = (() => {
     if (!o) return;
     o.setAttribute('hidden', '');
     openCount = Math.max(0, openCount - 1);
-    if (openCount === 0) document.body.classList.remove('modal-open');
+    if (openCount === 0) {
+      document.body.classList.remove('modal-open');
+      _lastFocus?.focus();
+      _lastFocus = null;
+    }
   }
 
   function hideAll() {
-    $$('.modal-overlay:not([hidden])').forEach(el => {
-      el.setAttribute('hidden', '');
-    });
+    $$('.modal-overlay:not([hidden])').forEach(el => el.setAttribute('hidden', ''));
     openCount = 0;
     document.body.classList.remove('modal-open');
+    _lastFocus?.focus();
+    _lastFocus = null;
   }
+
+  function isOpen() { return openCount > 0; }
 
   function init() {
     document.getElementById('service-modal-close')?.addEventListener('click', () => hide('service-modal'));
@@ -503,7 +515,7 @@ const Modals = (() => {
     document.addEventListener('keydown', e => { if (e.key === 'Escape') hideAll(); });
   }
 
-  return { init, show, hide, hideAll };
+  return { init, show, hide, hideAll, isOpen };
 })();
 
 /* ── 5. REQUEST SERVICE (smart prefill) ──────────────────── */
@@ -516,7 +528,7 @@ window.requestService = requestService;
 /* ── 5b. ENQUIRY POPUP MODAL ─────────────────────────────── */
 function openEnquiryModal(event, preselect) {
   if (event) event.preventDefault();
-  /* Prefill service if passed */
+  const triggerEl = event?.currentTarget || event?.target || null;
   if (preselect) {
     const sel = document.getElementById('eq-serviceRequired');
     if (sel) {
@@ -524,14 +536,11 @@ function openEnquiryModal(event, preselect) {
       if (match) sel.value = match.value;
     }
   }
-  /* Hide any previous messages */
   const suc = document.getElementById('eq-form-success');
   const err = document.getElementById('eq-form-error');
   if (suc) suc.setAttribute('hidden', '');
   if (err) err.setAttribute('hidden', '');
-  Modals.show('enquiry-modal');
-  /* Focus first field */
-  setTimeout(() => document.getElementById('eq-fullName')?.focus(), 100);
+  Modals.show('enquiry-modal', triggerEl);
 }
 window.openEnquiryModal = openEnquiryModal;
 
